@@ -1,0 +1,113 @@
+{
+  "page": {
+    "id": "examplePage",
+    "title": "Example JSON Form",
+    "elements": [
+      {
+        "id": "confidentiality-hint",
+        "component": "Hint",
+        "props": {
+          "children":"Responses will be kept stritly confidential.",
+          "size": "s"
+        }
+      },
+      {
+        "id": "yourName",
+        "component": "TextInput",
+        "props": {
+          "textInputLabel": "What's your name?",
+          "width": "s"
+        }
+      },
+      {
+        "id": "services",
+        "component": "Checkboxes",
+        "props": {
+          "label": "Which of our services are you interested in finding out more about?",
+          "options": [
+            {
+              "key": "option1",
+              "id": "designConsultancy",
+              "value": "designConsultancy",
+              "label": "Design Consultancy"
+            },
+            {
+              "key": "option2",
+              "id": "softwareDevelopment",
+              "value": "softwareDevelopment",
+              "label": "Software Development"
+            },
+            {
+              "key": "option3",
+              "id": "projectManagement",
+              "value": "projectManagement",
+              "label": "Project Management"
+            },
+            {
+              "key": "option4",
+              "id": "brandManagement",
+              "value": "brandManagement",
+              "label": "Brand Management"
+            }
+          ]
+        }
+      },
+      {
+        "id": "happyToBeEmailed",
+        "component": "Radios",
+        "props": {
+          "label": "Would you like us to keep you updated via email?",
+          "options": [
+            {
+              "key": "radio1",
+              "id": "no",
+              "value": "no",
+              "label": "No thanks"
+            },
+            {
+              "key": "radio2",
+              "id": "yes",
+              "value": "yes",
+              "label": "Yes please!"
+            }
+          ]
+        }
+      },
+      {
+        "id": "email",
+        "component": "TextInput",
+        "props": {
+          "textInputLabel": "Your email address:",
+          "width": "m"
+        }
+      },
+      {
+        "id": "confirmation",
+        "component": "ButtonGroup",
+        "props": {
+          "label": "Confirm",
+          "buttons": [
+            {
+              "key": "button1",
+              "id": "submit",
+              "type": "primary",
+              "size": "m",
+              "label": "Submit"
+            },
+            {
+              "key": "button2",
+              "id": "cancel",
+              "type": "secondary",
+              "size": "m",
+              "label": "Cancel"
+            }
+          ],
+          "content": {
+            "text": "Are you happy to submit your preferences?",
+            "hint": "Your preferences can be updated anytime"
+          }
+        }
+      }
+    ]
+  }
+}

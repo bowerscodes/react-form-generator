@@ -1,0 +1,175 @@
+{
+  "pageId": "formpage",
+  "pageTitle": "Example Form Page",
+  "sections": [
+    {
+      "sectionId": "yourDetails",
+      "sectionTitle": "Your Details",
+      "fields": [
+        {
+          "fieldId": "firstName",
+          "fieldLabel": "First Name",
+          "inputField": {
+            "fieldId": "firstName",
+            "type": "text",
+            "props": {
+              "required": true
+            }
+          }
+        },
+        {
+          "fieldId": "lastName",
+          "fieldLabel": "Last Name",
+          "inputField": {
+            "fieldId": "lastName",
+            "type": "text",
+            "props": {
+              "label": "Last Name",
+              "required": true
+            }
+          }
+        },
+        {
+          "fieldId": "dob",
+          "fieldLabel": "Date of Birth",
+          "inputField": {
+            "fieldId": "dob",
+            "type": "date",
+            "props": {
+              "required": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "services",
+      "sectionTitle": "Services",
+      "fields": [
+        {
+          "fieldId": "serviceType",
+          "fieldLabel": "Which of our services are you interested in finding out more about?",
+          "inputField": {
+            "fieldId": "serviceType",
+            "type": "checkboxes",
+            "props": {
+              "options": [
+                {
+                  "id": "designConsultancy",
+                  "value": "designConsultancy",
+                  "label": "Design Consultancy"
+                },
+                {
+                  "id": "softwareDevelopment",
+                  "value": "softwareDevelopment",
+                  "label": "Software Development"
+                },
+                {
+                  "id": "projectManagement",
+                  "value": "projectManagement",
+                  "label": "Project Management"
+                },
+                {
+                  "id": "brandManagement",
+                  "value": "brandManagement",
+                  "label": "Brand Management"
+                }
+              ],
+              "required": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "otherInfo",
+      "sectionTitle": "Other Information",
+      "fields": [
+        {
+          "fieldId": "otherInfo",
+          "fieldLabel": "Is there anything else you would like to tell us?",
+          "inputField": {
+            "fieldId": "otherInfo",
+            "type": "textArea",
+            "props": {
+              "required": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "howDidYouHear",
+      "sectionTitle": "How did you hear about us?",
+      "fields": [
+        {
+          "fieldId": "howDidYouHear",
+          "fieldLabel": "How did you hear about us?",
+          "inputField": {
+            "fieldId": "howDidYouHear",
+            "type": "select",
+            "props": {
+              "options": [
+                {
+                  "id": "google",
+                  "value": "google",
+                  "label": "Google"
+                },
+                {
+                  "id": "facebook",
+                  "value": "facebook",
+                  "label": "Facebook"
+                },
+                {
+                  "id": "twitter",
+                  "value": "twitter",
+                  "label": "Twitter / X"
+                },
+                {
+                  "id": "linkedin",
+                  "value": "linkedin",
+                  "label": "LinkedIn"
+                },
+                {
+                  "id": "other",
+                  "value": "other",
+                  "label": "Other"
+                }
+              ],
+              "required": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "sectionId": "commsConsent",
+      "sectionTitle": "Consent",
+      "fields": [
+        {
+          "fieldId": "commsConsent",
+          "fieldLabel": "Can we contact you about our services?",
+          "inputField": {
+            "fieldId": "commsConsent",
+            "type": "radios",
+            "props": {
+              "options": [
+                {
+                  "id": "yes",
+                  "value": "yes",
+                  "label": "Yes"
+                },
+                {
+                  "id": "no",
+                  "value": "no",
+                  "label": "No"
+                }
+              ],
+              "required": true
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
