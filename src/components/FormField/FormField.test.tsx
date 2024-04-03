@@ -4,7 +4,6 @@ import { cleanup, fireEvent, render, screen, act } from '@testing-library/react'
 import userEvent from '@testing-library/user-event';
 
 import FormField from './FormField';
-import exp from 'constants';
 
 afterEach(cleanup);
 
@@ -25,7 +24,7 @@ describe('FormField', () => {
       />
     );
 
-    expect (screen.getByRole('textbox')).not.toBeNull();
+    expect(screen.getByRole('textbox')).not.toBeNull();
     expect(screen.getByText('Test Field')).not.toBeNull();
 
   });
@@ -120,6 +119,89 @@ describe('FormField', () => {
     else {
       throw new Error('Date input fields not found');
     }
+  });
+
+  it('renders a FormField component with a Select, which handles a change to its value', () => {
+    
+    const fieldId = 'SelectFieldId';
+    
+    const field = render(
+      <FormField 
+        fieldId={fieldId}
+        fieldLabel='Select'
+        inputField={{
+          fieldId: fieldId,
+          type: 'select',
+          props: {
+            options: [
+              { label: 'Option 1', value: 'option1' },
+              { label: 'Option 2', value: 'option2' },
+              { label: 'Option 3', value: 'option3' },
+            ],
+          },
+          value: '',
+          onChange: jest.fn(),
+        }}
+      />
+    );
+
+    const select = field.getByLabelText('Select') as HTMLSelectElement;
+
+    expect(select.value).toEqual('');
+
+    fireEvent.change(select, { target: { value: 'option2' } });
+    expect(select.value).toEqual('option2');
+
+    fireEvent.change(select, { target: { value: 'option3' } });
+    expect(select.value).toEqual('option3');
+  });
+
+  it('renders a FormField component with Radios, which handles a change to its value', () => {
+    
+    const fieldId = 'RadiosFieldId';
+    
+    const field = render(
+      <FormField 
+        fieldId={fieldId}
+        fieldLabel='Radios'
+        inputField={{
+          fieldId: fieldId,
+          type: 'radios',
+          props: {
+            options: [
+              { label: 'Option 1', value: 'option1', id: 'option1' },
+              { label: 'Option 2', value: 'option2', id: 'option2' },
+              { label: 'Option 3', value: 'option3', id: 'option3'},
+            ],
+          },
+          value: '',
+          onChange: jest.fn(),
+        }}
+      />
+    );
+
+    const option1 = field.getByLabelText('Option 1');
+    const option2 = field.getByLabelText('Option 2');
+    const option3 = field.getByLabelText('Option 3');
+
+    expect((option1 as HTMLInputElement).checked).toEqual(false);
+    expect((option2 as HTMLInputElement).checked).toEqual(false);
+    expect((option3 as HTMLInputElement).checked).toEqual(false);
+
+    fireEvent.click(option1);
+    expect((option1 as HTMLInputElement).checked).toEqual(true);
+    expect((option2 as HTMLInputElement).checked).toEqual(false);
+    expect((option3 as HTMLInputElement).checked).toEqual(false);
+
+    fireEvent.click(option2);
+    expect((option1 as HTMLInputElement).checked).toEqual(false);
+    expect((option2 as HTMLInputElement).checked).toEqual(true);
+    expect((option3 as HTMLInputElement).checked).toEqual(false);
+
+    fireEvent.click(option3);
+    expect((option1 as HTMLInputElement).checked).toEqual(false);
+    expect((option2 as HTMLInputElement).checked).toEqual(false);
+    expect((option3 as HTMLInputElement).checked).toEqual(true);
   });
   
   describe('Checkboxes', () => {

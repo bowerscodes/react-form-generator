@@ -24,7 +24,6 @@
             "fieldId": "lastName",
             "type": "text",
             "props": {
-              "label": "Last Name",
               "required": true
             }
           }

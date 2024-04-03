@@ -58,7 +58,6 @@ const config = {
         'css-loader', 
         'sass-loader'
       ],
-      include: path.resolve(__dirname, '../../react-component-library'),
     });
 
     // Rule for TypeScript files

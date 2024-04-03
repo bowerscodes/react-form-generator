@@ -21,7 +21,7 @@ export interface InputField {
   fieldId: string;
   type: string;
   props: Record<string, unknown>;
-  value: string | number | string[] | undefined;
+  value?: string | string[] | undefined;
   onChange: OnChange;
 }
 
@@ -29,12 +29,9 @@ const useGetInputField = (input: InputField, onChange: (event: InputChangeEvent)
   const { fieldId, type, props } = input;
   const { value, handleChange } = useInputField(input.value, onChange);
   
-  let inputValue: string | number | string[] | undefined;
+  let inputValue: string | string[] | undefined;
   if (typeof value === 'string') {
     inputValue = value;
-  }
-  else if (typeof value === 'number') {
-    inputValue = value.toString();
   }
   else if (Array.isArray(value)) {
     inputValue = value;

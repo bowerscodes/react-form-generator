@@ -2,7 +2,7 @@ import { InputChangeEvent } from '../../utils/hooks/useInputField';
 import { InputField } from '../../utils/hooks/useGetInputField';
 
 
-const handleInputChange = (setValue: React.Dispatch<React.SetStateAction<string | number | string[]>>, inputField: InputField) => {
+const handleInputChange = (setValue: React.Dispatch<React.SetStateAction<string | string[]>>, inputField: InputField) => {
   return (event: InputChangeEvent) => {
     const target = event.target as InputChangeEvent['target'];
     

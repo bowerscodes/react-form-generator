@@ -5,7 +5,7 @@
     "skipLibCheck": true,
     "strict": true,
     "noEmit": false,
-    "noEmitOnError": true,
+    "noEmitOnError": false,
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "node",

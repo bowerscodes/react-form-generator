@@ -4,8 +4,9 @@ import { Label } from 'react-component-library';
 import { handleInputChange } from './handlers';
 import useGetInputField, { InputField } from '../../utils/hooks/useGetInputField';
 import { InputChangeEvent } from '../../utils/hooks/useInputField';
+import './FormField.scss';
 
-interface FormFieldProps {
+export interface FormFieldProps {
   fieldId: string;
   fieldLabel?: string;
   inputField: InputField;
