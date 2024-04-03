@@ -21,7 +21,7 @@ const FormPage = ({
 
   return (
     <div className={DEFAULT_CLASS} id={pageId}>
-      {pageTitle && <Heading>{pageTitle}</Heading>}
+      {pageTitle && <Heading hNumber='2'>{pageTitle}</Heading>}
       {sections.map((section, index) => <FormSection key={index} {...section} />)}
     </div>
   )

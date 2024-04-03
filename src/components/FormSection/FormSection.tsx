@@ -30,7 +30,7 @@ const FormSection = ({
   return (
     <section id={sectionId}>
       <fieldset>
-        {sectionTitle && <legend>{<Heading id={`${sectionId}--heading`}>{sectionTitle}</Heading>}</legend>}
+        {sectionTitle && <legend>{<Heading id={`${sectionId}--heading`} hNumber={'3'}>{sectionTitle}</Heading>}</legend>}
         {sectionHint && <Hint id={`${sectionId}--hint`}>{sectionHint}</Hint>}
         {formFields}
       </fieldset>
