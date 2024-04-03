@@ -44,6 +44,7 @@ describe('FormSection', () => {
       const section: FormSectionProps = {
         sectionId: 'yourDetails',
         sectionTitle: 'Your Details',
+        sectionHint: 'Please enter your details below',
         fields: fields
       };
   
@@ -51,11 +52,13 @@ describe('FormSection', () => {
         <FormSection
           sectionId={section.sectionId}
           sectionTitle={section.sectionTitle}
+          sectionHint={section.sectionHint}
           fields={fields}
         />
       );
   
       expect(screen.getByText('Your Details')).not.toBeNull();
+      expect(screen.getByText('Please enter your details below')).not.toBeNull();
       expect(screen.getByText('First Name')).not.toBeNull();
       expect(screen.getByText('Last Name')).not.toBeNull();
     });

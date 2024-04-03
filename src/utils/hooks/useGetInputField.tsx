@@ -26,14 +26,12 @@ export interface InputField {
 }
 
 const useGetInputField = (input: InputField, onChange: (event: InputChangeEvent) => void) => {
+  
   const { fieldId, type, props } = input;
   const { value, handleChange } = useInputField(input.value, onChange);
   
   let inputValue: string | string[] | undefined;
-  if (typeof value === 'string') {
-    inputValue = value;
-  }
-  else if (Array.isArray(value)) {
+  if (typeof value === 'string' || Array.isArray(value)) {
     inputValue = value;
   }
 
