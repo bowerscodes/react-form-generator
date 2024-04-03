@@ -5,6 +5,7 @@
     {
       "sectionId": "yourDetails",
       "sectionTitle": "Your Details",
+      "sectionHint": "Please provide your details below.",
       "fields": [
         {
           "fieldId": "firstName",
