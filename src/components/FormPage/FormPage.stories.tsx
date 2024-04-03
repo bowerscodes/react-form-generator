@@ -1,10 +1,36 @@
 import React from 'react';
+
 import FormPage from './FormPage';
 import page from '../../data/FormPage.json';
+import { InputChangeEvent } from '../../utils/hooks/useInputField';
 
 export default {
   title: 'FormPage',
   component: FormPage,
 };
 
-// export const Primary = () => <FormPage {...page}/>;
+export const Default = () => {
+  
+  const pageWithOnChange = {
+    ...page,
+    sections: page.sections.map(section => ({
+      ...section,
+      fields: section.fields.map(field => ({
+        ...field,
+        inputField: {
+          ...field.inputField,
+          onChange: (event: InputChangeEvent) => {
+            if (typeof event.target.value === 'string') {
+              if ('value' in field.inputField) {
+                field.inputField.value = event.target.value;
+              }
+            }
+          }
+        }
+      }))
+    }))
+  };
+
+  return <FormPage {...pageWithOnChange}/>
+
+};

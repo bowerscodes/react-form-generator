@@ -5,15 +5,13 @@ import FormSection, { FormSectionProps } from './FormSection';
 import FormField, { FormFieldProps } from '../FormField/FormField';
 import { InputChangeEvent } from '../../utils/hooks/useInputField';
 
-const section1 = Page.sections[0];
-
 
 export default {
   title: 'Components/FormSection',
   component: FormSection,
 };
 
-console.log(section1)
+const section1 = Page.sections[0];
 
 const FieldWithHandlers: React.FC<FormFieldProps> = ({ inputField }) => {
   const [ value, setValue ] = useState('');

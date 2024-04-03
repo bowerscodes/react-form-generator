@@ -1,22 +1,14 @@
 import React from 'react';
+import { Heading } from 'react-component-library';
+
+import FormSection, { FormSectionProps } from '../FormSection/FormSection';
+import './FormPage.scss';
 
 
-type FormPage = {
+interface FormPageProps {
   pageId: string;
   pageTitle?: string;
-  sections: Array<Section> | Array<Field>; // This should be Section[] but we need to handle the case where the page has no sections and only fields
-};
-
-type Section = {
-  sectionId: string;
-  sectionTitle?: string;
-  fields: Field[];
-};
-
-type Field = {
-  fieldId: string;
-  fieldLabel?: string;
-  components: { type: string };
+  sections: FormSectionProps[];
 };
 
 export const DEFAULT_CLASS = 'form-page';
@@ -25,16 +17,15 @@ const FormPage = ({
   pageId,
   pageTitle,
   sections,
-}: FormPage) => {
+}: FormPageProps) => {
 
-  
   return (
     <div className={DEFAULT_CLASS} id={pageId}>
-      {pageTitle && <h1>{pageTitle}</h1>}
-      {}
+      {pageTitle && <Heading>{pageTitle}</Heading>}
+      {sections.map((section, index) => <FormSection key={index} {...section} />)}
     </div>
   )
-
 };
 
 export default FormPage;
+export type { FormPageProps };
