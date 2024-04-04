@@ -19,7 +19,6 @@ describe('FormField', () => {
           type: 'text',
           props: {},
           value: '',
-          onChange: jest.fn(),
         }}
       />
     );
@@ -39,7 +38,6 @@ describe('FormField', () => {
           type: 'text',
           props: {},
           value: '',
-          onChange: jest.fn(),
         }}
       />
     );
@@ -68,7 +66,6 @@ describe('FormField', () => {
           type: 'textarea',
           props: {},
           value: '',
-          onChange: jest.fn(),
         }}
       />
     );
@@ -95,7 +92,6 @@ describe('FormField', () => {
           type: 'date',
           props: {},
           value: '',
-          onChange: jest.fn(),
         }}
       />
     );
@@ -140,7 +136,6 @@ describe('FormField', () => {
             ],
           },
           value: '',
-          onChange: jest.fn(),
         }}
       />
     );
@@ -175,7 +170,6 @@ describe('FormField', () => {
             ],
           },
           value: '',
-          onChange: jest.fn(),
         }}
       />
     );
@@ -216,7 +210,6 @@ describe('FormField', () => {
             type: 'checkbox',
             props: {},
             value: 'value1',
-            onChange: jest.fn(),
           }}
         />
       );
@@ -241,7 +234,6 @@ describe('FormField', () => {
               ],
             },
             value: [],
-            onChange: jest.fn(),
           }}
         />
       );

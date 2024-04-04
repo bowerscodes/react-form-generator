@@ -23,7 +23,6 @@ describe('FormSection', () => {
               label: 'First Name',
               required: true
             },
-            onChange: jest.fn(),
           }
         },
         {
@@ -36,7 +35,6 @@ describe('FormSection', () => {
               label: 'Last Name',
               required: true
             },
-            onChange: jest.fn(),
           }
         }
       ];
@@ -73,7 +71,6 @@ describe('FormSection', () => {
             type: 'text',
             props: {},
             value: '',
-            onChange: jest.fn(),
           }
         },
         {
@@ -84,7 +81,6 @@ describe('FormSection', () => {
             type: 'text',
             props: {},
             value: '',
-            onChange: jest.fn(),
           }
         }
       ];

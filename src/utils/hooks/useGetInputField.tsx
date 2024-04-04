@@ -22,10 +22,13 @@ export interface InputField {
   type: string;
   props: Record<string, unknown>;
   value?: string | string[] | undefined;
+}
+
+export interface InputFieldWithOnChange extends InputField {
   onChange: OnChange;
 }
 
-const useGetInputField = (input: InputField, onChange: (event: InputChangeEvent) => void) => {
+const useGetInputField = (input: InputField, onChange: (event: InputChangeEvent) => void = () => {}) => {
   
   const { fieldId, type, props } = input;
   const { value, handleChange } = useInputField(input.value, onChange);

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Label } from 'react-component-library';
 
 import { handleInputChange } from './handlers';
-import useGetInputField, { InputField } from '../../utils/hooks/useGetInputField';
+import useGetInputField, { InputField, InputFieldWithOnChange } from '../../utils/hooks/useGetInputField';
 import { InputChangeEvent } from '../../utils/hooks/useInputField';
 import './FormField.scss';
 
@@ -23,13 +23,18 @@ const FormField = ({
 
   const [ value, setValue ] = useState(inputField.value || '');
 
-  const handleChange = handleInputChange(setValue, inputField);
+  const inputFieldWithOnChange: InputFieldWithOnChange = {
+    ...inputField,
+    onChange: (event: InputChangeEvent) => {}
+  };
+  
+  const handleChange = handleInputChange(setValue, inputFieldWithOnChange);
   
   if (process.env.NODE_ENV === 'development') {
     console.log(fieldId,': ',value);
   }
 
-  const input = useGetInputField({ ...inputField, value }, handleChange);
+  const input = useGetInputField({ ...inputFieldWithOnChange, value }, handleChange);
 
   return(
     <div className={DEFAULT_CLASS}>

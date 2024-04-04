@@ -25,7 +25,7 @@ const FieldWithHandlers: React.FC<FormFieldProps> = ({ inputField }) => {
   return (
     <FormField 
       {...inputField}
-      inputField={{...inputField, value, onChange: handleChange}}
+      inputField={{...inputField}}
     />
   );
 };
@@ -47,6 +47,6 @@ const fieldsWithHandlers: FormFieldProps[] = section1.fields.map((field, index) 
   };
 });
 
-const section = { ...section1, fields: fieldsWithHandlers };
+const section = { ...section1};
 
 export const Default = () => <FormSection {...section} />;

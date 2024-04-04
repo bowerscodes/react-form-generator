@@ -1,10 +1,10 @@
 import { handleInputChange } from './handlers';
-import { InputField } from '@/utils/hooks/useGetInputField';
+import { InputField, InputFieldWithOnChange } from '@/utils/hooks/useGetInputField';
 
 describe('handleInputChange', () =>{
 
   let setValue: jest.Mock;
-  let inputField: InputField;
+  let inputField: InputFieldWithOnChange;
 
   it('should handle a change event for a checkbox', () => {
       
