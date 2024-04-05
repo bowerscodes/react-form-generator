@@ -5,7 +5,7 @@ import page from '../../data/FormPage.json';
 import { InputChangeEvent } from '../../utils/hooks/useInputField';
 
 export default {
-  title: 'FormPage',
+  title: 'Components/FormPage',
   component: FormPage,
 };
 

@@ -1,6 +1,6 @@
 {
-  "pageId": "formpage",
-  "pageTitle": "Example Form Page",
+  "pageId": "signupPage",
+  "pageTitle": "Sign Up Page",
   "sections": [
     {
       "sectionId": "yourDetails",
