@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Heading } from 'react-component-library';
 
 import FormSection, { FormSectionProps } from '../FormSection/FormSection';
+import { FormDataContext } from '../../context/FormDataContext';
 import './FormPage.scss';
 
 
@@ -18,6 +19,13 @@ const FormPage = ({
   pageTitle,
   sections,
 }: FormPageProps) => {
+
+  const context = useContext(FormDataContext);
+  if (!context) {
+    throw new Error('FormPage must be used within a FormDataContextProvider')
+  }
+
+  const { formData, setFormData } = context;
 
   return (
     <div className={DEFAULT_CLASS} id={pageId}>

@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { ButtonGroup, Heading, Navigate } from 'react-component-library';
 
-import FormPage, {FormPageProps} from '../FormPage/FormPage';
+import FormPage, { FormPageProps } from '../FormPage/FormPage';
+import { FormDataContext } from '../../context/FormDataContext';
 
 export interface FormProps {
   formId: string;
@@ -17,7 +18,14 @@ const Form = ({
   pages
 }: FormProps) => {
 
+  const context = useContext(FormDataContext);
+  if (!context) {
+    throw new Error('Form must be used within a FormDataContextProvider')
+  };
+
   const [ currentPage, setCurrentPage ] = useState(0);
+
+  const { formData, setFormData } = context;
 
   
   return(
