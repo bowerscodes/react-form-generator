@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Label } from 'react-component-library';
 
 import { handleInputChange } from './handlers';
@@ -14,6 +14,10 @@ export interface FormFieldProps {
   value?: string | string[];
 }
 
+type FormData = {
+  [key: string]: string | string[];
+}
+
 export const DEFAULT_CLASS = 'form-field';
 
 const FormField = ({
@@ -22,7 +26,7 @@ const FormField = ({
   inputField,
 }: FormFieldProps) => {
 
-  const context = useContext(FormDataContext);
+  const context = useContext(FormDataContext) as { formData: FormData, setFormData: Function } | undefined;
   if (!context) {
     throw new Error('FormField must be used within a FormDataContextProvider')
   };
@@ -31,6 +35,12 @@ const FormField = ({
 
   const [ value, setValue ] = useState(inputField.value || '');
   console.log('initialValue: ', value)
+
+  useEffect(() => {
+    if(formData[fieldId]) {
+      setValue(formData[fieldId])
+    }
+  }, [formData, fieldId])
 
   const inputFieldWithOnChange: InputFieldWithOnChange = {
     ...inputField,
@@ -51,7 +61,7 @@ const FormField = ({
     console.log(fieldId,': ',value);
   }
 
-  const input = useGetInputField({ ...inputFieldWithOnChange, value }, handleChange);
+  const input = useGetInputField({ ...inputFieldWithOnChange, value: formData[fieldId] }, formData[fieldId], handleChange);
 
   return(
     <div className={DEFAULT_CLASS}>

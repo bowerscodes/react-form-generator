@@ -14,6 +14,7 @@ interface FormDataContextProviderProps {
 export const FormDataContextProvider: React.FC<FormDataContextProviderProps> = ({ children }) => {
 
   const [formData, setFormData] = React.useState<Object | Array<Object>>({});
+  console.log('formData: ', formData);
 
   return (
     <FormDataContext.Provider value={{ formData, setFormData }}>

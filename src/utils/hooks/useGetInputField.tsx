@@ -28,10 +28,10 @@ export interface InputFieldWithOnChange extends InputField {
   onChange: OnChange;
 }
 
-const useGetInputField = (input: InputField, onChange: (event: InputChangeEvent) => void = () => {}) => {
+const useGetInputField = (input: InputField, formDataValue: string | string[] | undefined, onChange: (event: InputChangeEvent) => void = () => {}) => {
   
   const { fieldId, type, props } = input;
-  const { value, handleChange } = useInputField(input.value, onChange);
+  const { value, handleChange } = useInputField(formDataValue, onChange);
   
   let inputValue: string | string[] | undefined;
   if (typeof value === 'string' || Array.isArray(value)) {
