@@ -1,14 +1,10 @@
 import React, { useContext, useState } from 'react';
 import { ButtonGroup, Heading, Navigate } from 'react-component-library';
 
-import FormPage, { FormPageProps } from '../FormPage/FormPage';
+import FormPage from '../FormPage/FormPage';
+import { FormProps, FormPageProps } from '../../types/FormTypes';
 import { FormDataContext } from '../../context/FormDataContext';
 
-export interface FormProps {
-  formId: string;
-  formTitle?: string;
-  pages: FormPageProps[];
-};
 
 export const DEFAULT_CLASS = 'form';
 

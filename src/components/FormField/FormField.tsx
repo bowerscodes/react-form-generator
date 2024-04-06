@@ -1,18 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Label } from 'react-component-library';
 
+import { FormFieldProps, InputField } from '../../types/FormTypes';
 import { handleInputChange } from './handlers';
-import useGetInputField, { InputField, InputFieldWithOnChange } from '../../utils/hooks/useGetInputField';
+import useGetInputField, { InputFieldWithOnChange } from '../../utils/hooks/useGetInputField';
 import { InputChangeEvent } from '../../utils/hooks/useInputField';
 import { FormDataContext } from '../../context/FormDataContext';
 import './FormField.scss';
 
-export interface FormFieldProps {
-  fieldId: string;
-  fieldLabel?: string;
-  inputField: InputField;
-  value?: string | string[];
-}
 
 type FormData = {
   [key: string]: string | string[];
@@ -26,7 +21,7 @@ const FormField = ({
   inputField,
 }: FormFieldProps) => {
 
-  const context = useContext(FormDataContext) as { formData: FormData, setFormData: Function } | undefined;
+  const context = useContext(FormDataContext) as { formData: FormData, setFormData: React.Dispatch<React.SetStateAction<Object | Array<Object>>> } | undefined;
   if (!context) {
     throw new Error('FormField must be used within a FormDataContextProvider')
   };
@@ -38,7 +33,10 @@ const FormField = ({
 
   useEffect(() => {
     if(formData[fieldId]) {
+      console.log('formData[fieldId]: ', formData[fieldId])
+      console.log('value before update: ', value)
       setValue(formData[fieldId])
+      console.log('value after update: ', value)
     }
   }, [formData, fieldId])
 
@@ -55,13 +53,13 @@ const FormField = ({
     }
   };
   
-  const handleChange = handleInputChange(setValue, inputFieldWithOnChange);
+  const handleChange = handleInputChange(fieldId, setValue, inputFieldWithOnChange, setFormData, formData);
   
   if (process.env.NODE_ENV === 'development') {
     console.log(fieldId,': ',value);
   }
 
-  const input = useGetInputField({ ...inputFieldWithOnChange, value: formData[fieldId] }, formData[fieldId], handleChange);
+  const input = useGetInputField({ ...inputFieldWithOnChange, value }, value, handleChange);
 
   return(
     <div className={DEFAULT_CLASS}>

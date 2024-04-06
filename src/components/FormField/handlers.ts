@@ -1,8 +1,31 @@
 import { InputChangeEvent } from '../../utils/hooks/useInputField';
 import { InputFieldWithOnChange } from '../../utils/hooks/useGetInputField';
 
+const updateFormData = (formData: Object | Array<Object>, fieldId: string, newValue: string | string[]) => {
+  
+  // Deep clone the formData object to avoid mutating the original
+  const updatedFormData = JSON.parse(JSON.stringify(formData));
 
-const handleInputChange = (setValue: React.Dispatch<React.SetStateAction<string | string[]>>, inputField: InputFieldWithOnChange) => {
+  // Iterate over the pages and sections to find the fieldId
+  for (const page of updatedFormData.pages) {
+    for (const section of page.sections) {
+      if (section.fields.hasOwnProperty(fieldId)) {
+        section.fields[fieldId] = newValue;
+        return updatedFormData;
+      }
+    }
+  };
+  
+  return formData;
+};
+
+const handleInputChange = (
+  fieldId: string,
+  setValue: React.Dispatch<React.SetStateAction<string | string[]>>, 
+  inputField: InputFieldWithOnChange,
+  setFormData: React.Dispatch<React.SetStateAction<Object | Array<Object>>>,
+  formData: Object | Array<Object>,
+  ) => {
   return (event: InputChangeEvent) => {
     const target = event.target as InputChangeEvent['target'];
     
@@ -39,14 +62,21 @@ const handleInputChange = (setValue: React.Dispatch<React.SetStateAction<string 
         setValue(target.value);
       }
       inputField.onChange(event);
+      setFormData(prevFormData => ({ 
+        ...prevFormData, 
+        [fieldId]: newEventValue 
+      }));
     }
     // For all other Inputs
     else {
       setValue(target.value);
       inputField.onChange(event);
+      setFormData(prevFormData => ({ 
+        ...prevFormData, 
+        [fieldId]: target.value 
+      }));
     }
   };
 };
-
 
 export { handleInputChange };

@@ -1,5 +1,5 @@
 // useInputField.ts
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CheckboxesEventTarget } from 'react-component-library';
 
 export type InputChangeEvent =
@@ -8,8 +8,12 @@ export type InputChangeEvent =
   React.ChangeEvent<HTMLSelectElement> |
   React.ChangeEvent<CheckboxesEventTarget>;
 
-export const useInputField = (initialValue: string | string[] | undefined, onChange: (event: InputChangeEvent) => void) => {
-  const [value, setValue] = useState<string | string[] | undefined>(initialValue || '');
+export const useInputField = (formDataValue: string | string[] | undefined, onChange: (event: InputChangeEvent) => void) => {
+  const [value, setValue] = useState(formDataValue || '');
+
+  useEffect(() => {
+    setValue(formDataValue || '');
+  }, [formDataValue]);
 
   const handleChange = (event: InputChangeEvent) => {
     const target = event.target as InputChangeEvent['target'];
@@ -28,7 +32,9 @@ export const useInputField = (initialValue: string | string[] | undefined, onCha
     onChange(event);
   };
 
-  return { value, handleChange };
+  const getValue = () => value;
+
+  return { getValue, handleChange };
 };
 
 export default useInputField;

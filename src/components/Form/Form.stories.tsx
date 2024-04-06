@@ -1,7 +1,8 @@
 import React, { useState} from 'react';
 
+import Form from './Form';
+import { FormProps } from '../../types/FormTypes';
 import { FormDataContextProvider } from '../../context/FormDataContext';
-import Form, { FormProps } from './Form';
 import form from '../../data/MultiPageForm.json';
 
 export default {
@@ -14,7 +15,7 @@ const Wrapper = () => {
     const [ formData, setFormData ] = useState({});
   
     return(
-      <FormDataContextProvider>
+      <FormDataContextProvider formSchema={form}>
         <Form {...form} />
       </FormDataContextProvider>
     );

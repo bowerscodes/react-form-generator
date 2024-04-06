@@ -1,5 +1,6 @@
 import { handleInputChange } from './handlers';
-import { InputField, InputFieldWithOnChange } from '@/utils/hooks/useGetInputField';
+import { InputFieldWithOnChange } from '@/utils/hooks/useGetInputField';
+import { InputField } from '../../types/FormTypes';
 
 describe('handleInputChange', () =>{
 
@@ -24,8 +25,11 @@ describe('handleInputChange', () =>{
         checked: true,
       },
     } as any;
+
+    const formData = jest.fn();
+    const setFormData = jest.fn();
   
-    handleInputChange(setValue, inputField)(event);
+    handleInputChange(inputField.fieldId, setValue, inputField, formData, setFormData)(event);
   
     expect(inputField.onChange).toHaveBeenCalledWith(event);
   });
@@ -46,9 +50,12 @@ describe('handleInputChange', () =>{
         checked: true,
       },
     } as any;
+
+    const formData = jest.fn();
+    const setFormData = jest.fn();
   
-    handleInputChange(setValue, inputField)(event);
-  
+    handleInputChange(inputField.fieldId, setValue, inputField, formData, setFormData)(event);
+    
     expect(setValue).toHaveBeenCalledWith('test');
     expect(inputField.onChange).toHaveBeenCalledWith(event);
   });
@@ -71,8 +78,11 @@ describe('handleInputChange', () =>{
       },
     } as any;
   
-    handleInputChange(setValue, inputField)(event);
+    const formData = jest.fn();
+    const setFormData = jest.fn();
   
+    handleInputChange(inputField.fieldId, setValue, inputField, formData, setFormData)(event);
+
     expect(setValue).toHaveBeenCalledWith('');
     expect(inputField.onChange).toHaveBeenCalledWith(event);
   });
@@ -96,8 +106,10 @@ describe('handleInputChange', () =>{
       target: mockInput,
     } as any;
 
-    handleInputChange(setValue, inputField)(event);
-
+    const formData = jest.fn();
+    const setFormData = jest.fn();
+  
+    handleInputChange(inputField.fieldId, setValue, inputField, formData, setFormData)(event);
   
     expect(setValue).toHaveBeenCalledWith('test2');
     expect(inputField.onChange).toHaveBeenCalledWith(event);
@@ -120,8 +132,11 @@ describe('handleInputChange', () =>{
       },
     } as any;
   
-    handleInputChange(setValue, inputField)(event);
+    const formData = jest.fn();
+    const setFormData = jest.fn();
   
+    handleInputChange(inputField.fieldId, setValue, inputField, formData, setFormData)(event);
+
     expect(setValue).toHaveBeenCalledWith('');
     expect(inputField.onChange).toHaveBeenCalledWith(event);
   });
@@ -145,8 +160,11 @@ describe('handleInputChange', () =>{
       },
     } as any;
   
-    handleInputChange(setValue, inputField)(event);
+    const formData = jest.fn();
+    const setFormData = jest.fn();
   
+    handleInputChange(inputField.fieldId, setValue, inputField, formData, setFormData)(event);
+
     expect(inputField.onChange).toHaveBeenCalledWith(event);
   });
 
@@ -167,8 +185,11 @@ describe('handleInputChange', () =>{
       },
     } as any;
   
-    handleInputChange(setValue, inputField)(event);
+    const formData = jest.fn();
+    const setFormData = jest.fn();
   
+    handleInputChange(inputField.fieldId, setValue, inputField, formData, setFormData)(event);
+
     expect(inputField.onChange).toHaveBeenCalledWith(event);
   });
 });

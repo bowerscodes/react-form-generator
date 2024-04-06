@@ -11,18 +11,13 @@ import {
   TextInput,
 } from 'react-component-library';
 
+import { InputField } from '../../types/FormTypes'
 import useInputField, { InputChangeEvent } from './useInputField';
 
 type OnChange = (
   event: InputChangeEvent
 ) => void;
 
-export interface InputField {
-  fieldId: string;
-  type: string;
-  props: Record<string, unknown>;
-  value?: string | string[] | undefined;
-}
 
 export interface InputFieldWithOnChange extends InputField {
   onChange: OnChange;
@@ -31,11 +26,11 @@ export interface InputFieldWithOnChange extends InputField {
 const useGetInputField = (input: InputField, formDataValue: string | string[] | undefined, onChange: (event: InputChangeEvent) => void = () => {}) => {
   
   const { fieldId, type, props } = input;
-  const { value, handleChange } = useInputField(formDataValue, onChange);
+  const { getValue, handleChange } = useInputField(formDataValue, onChange);
   
   let inputValue: string | string[] | undefined;
-  if (typeof value === 'string' || Array.isArray(value)) {
-    inputValue = value;
+  if (typeof getValue() === 'string' || Array.isArray(getValue())) {
+    inputValue = getValue();
   }
 
 

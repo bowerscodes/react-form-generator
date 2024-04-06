@@ -1,7 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-import Form, { FormProps } from './Form';
+import Form from './Form';
+import { FormProps } from '../../types/FormTypes';
 
 describe('Form', () => {
 

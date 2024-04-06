@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 
 import Page from '../../data/FormPage.json';
-import FormSection, { FormSectionProps } from './FormSection';
-import FormField, { FormFieldProps } from '../FormField/FormField';
+import FormSection from './FormSection';
+import FormField from '../FormField/FormField';
+import { FormSectionProps, FormFieldProps } from '../../types/FormTypes';
 import { InputChangeEvent } from '../../utils/hooks/useInputField';
 
 

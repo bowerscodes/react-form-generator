@@ -2,17 +2,8 @@ import React, { useState } from 'react';
 import { Heading, Hint } from 'react-component-library';
 
 import FormField from '../FormField/FormField';
-import { InputField } from '../../utils/hooks/useGetInputField';
-import { FormFieldProps } from '../FormField/FormField';
+import { FormSectionProps, FormFieldProps, InputField } from '../../types/FormTypes';
 import './FormSection.scss';
-
-
-export interface FormSectionProps {
-  sectionId: string;
-  sectionTitle?: string;
-  sectionHint?: string;
-  fields: FormFieldProps[];
-};
 
 
 const FormSection = ({

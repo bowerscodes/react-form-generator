@@ -1,16 +1,11 @@
 import React, { useContext } from 'react';
 import { Heading } from 'react-component-library';
 
-import FormSection, { FormSectionProps } from '../FormSection/FormSection';
+import FormSection from '../FormSection/FormSection';
+import { FormPageProps, FormSectionProps } from '../../types/FormTypes';
 import { FormDataContext } from '../../context/FormDataContext';
 import './FormPage.scss';
 
-
-interface FormPageProps {
-  pageId: string;
-  pageTitle?: string;
-  sections: FormSectionProps[];
-};
 
 export const DEFAULT_CLASS = 'form-page';
 
