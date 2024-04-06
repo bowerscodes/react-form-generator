@@ -1,27 +1,28 @@
 import React, { createContext } from 'react';
 
-import { FormProps } from '../types/FormTypes';
+import { FormData, FormProps } from '../types/FormTypes';
 
 interface FormDataContextProps {
   formSchema: FormProps;
-  formData: Object | Array<Object>;
-  setFormData: React.Dispatch<React.SetStateAction<Object | Array<Object>>>;
+  formData: { formId: string, [key: string]: string | string[] };
+  setFormData: React.Dispatch<React.SetStateAction<{ formId: string, [key: string]: string | string[] }>>;
 };
 
-const createInitialContext = (formSchema: FormProps): Object => {
-  return {
-    formId: formSchema.formId,
-    pages: formSchema.pages.map((page) => ({
-      pageId: page.pageId,
-      sections: page.sections.map((section) => ({
-        sectionId: section.sectionId,
-        fields: section.fields.reduce((acc, field) => ({
-          ...acc,
-          [field.fieldId]: field.value || ''
-        }), {})
-      }))
-    }))
-  };
+const createInitialContext = (formSchema: FormProps): { 
+  formId: string,
+  [key: string]: string | string[] 
+} => {
+  let formData: { formId: string, [key: string]: string | string[] } = { formId: formSchema.formId};
+
+  formSchema.pages.forEach(page => {
+    page.sections.forEach(section => {
+      section.fields.forEach(field => {
+        formData[field.fieldId] = Array.isArray(field.value) ? field.value.join(', ') : field.value || '';
+      });
+    });
+  });
+
+  return formData;
 };
 
 export const FormDataContext = createContext<FormDataContextProps | undefined>(undefined);
@@ -33,8 +34,7 @@ interface FormDataContextProviderProps {
 
 export const FormDataContextProvider: React.FC<FormDataContextProviderProps> = ({ children, formSchema }) => {
   const initialContext = createInitialContext(formSchema)
-  const [formData, setFormData] = React.useState<Object | Array<Object>>(initialContext);
-  console.log('formData: ', formData);
+  const [formData, setFormData] = React.useState<{ formId: string, [key: string]: string | string[] }>(initialContext);
 
   return (
     <FormDataContext.Provider value={{ formSchema, formData, setFormData }}>

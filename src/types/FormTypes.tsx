@@ -1,3 +1,8 @@
+export type FormData = {
+  formId: string;
+  [key: string]: string | string[];
+};
+
 export interface FormProps {
   formId: string;
   formTitle?: string;
@@ -23,6 +28,7 @@ export interface FormFieldProps {
   inputField: InputField;
   value?: string | string[];
 };
+
 
 export interface InputField {
   fieldId: string;

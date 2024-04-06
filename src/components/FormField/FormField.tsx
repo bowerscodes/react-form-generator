@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Label } from 'react-component-library';
 
-import { FormFieldProps, InputField } from '../../types/FormTypes';
+import { FormData, FormFieldProps, InputField } from '../../types/FormTypes';
 import { handleInputChange } from './handlers';
 import useGetInputField, { InputFieldWithOnChange } from '../../utils/hooks/useGetInputField';
 import { InputChangeEvent } from '../../utils/hooks/useInputField';
@@ -9,9 +9,6 @@ import { FormDataContext } from '../../context/FormDataContext';
 import './FormField.scss';
 
 
-type FormData = {
-  [key: string]: string | string[];
-}
 
 export const DEFAULT_CLASS = 'form-field';
 
@@ -26,17 +23,18 @@ const FormField = ({
     throw new Error('FormField must be used within a FormDataContextProvider')
   };
 
+  const getFieldValue = (formData: FormData, fieldId: string): string | undefined => {
+    const value = formData[fieldId];
+    return Array.isArray(value) ? value.join(', ') : value;
+  };
+
   const { formData, setFormData } = context
 
-  const [ value, setValue ] = useState(inputField.value || '');
-  console.log('initialValue: ', value)
+  const [ value, setValue ] = useState(getFieldValue(formData, fieldId) || inputField.value || '');
 
   useEffect(() => {
     if(formData[fieldId]) {
-      console.log('formData[fieldId]: ', formData[fieldId])
-      console.log('value before update: ', value)
       setValue(formData[fieldId])
-      console.log('value after update: ', value)
     }
   }, [formData, fieldId])
 
@@ -48,8 +46,6 @@ const FormField = ({
         ...formData, 
         [fieldId]: event.target.value 
       });
-      console.log('Updated value: ', event.target.value);
-      console.log('Updated formData: ', formData)
     }
   };
   
@@ -57,6 +53,7 @@ const FormField = ({
   
   if (process.env.NODE_ENV === 'development') {
     console.log(fieldId,': ',value);
+    console.log('formData: ', formData);
   }
 
   const input = useGetInputField({ ...inputFieldWithOnChange, value }, value, handleChange);
