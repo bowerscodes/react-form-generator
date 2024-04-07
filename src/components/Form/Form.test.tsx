@@ -96,7 +96,7 @@ describe('Form', () => {
     expect(wrapper.id).toEqual('testForm');
 
     // Page 1
-    const page1 = wrapper.childNodes[0] as HTMLElement;
+    const page1 = wrapper.childNodes[0].childNodes[0] as HTMLElement;
     const page1Id = form.pages[0].pageId;
     const page1Title = form.pages[0].pageTitle;
     checkPage(page1, page1Id, page1Title);
