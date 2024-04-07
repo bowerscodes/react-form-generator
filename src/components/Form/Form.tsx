@@ -56,6 +56,7 @@ const Form = ({
             navItems={pages}
             currentIndex={currentPage}
             setCurrent={setCurrentPage}
+            submit
           />
         }
       </form>
