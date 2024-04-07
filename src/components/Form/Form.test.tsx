@@ -131,5 +131,4 @@ describe('Form', () => {
     expect(queryByLabelText('Navigation')).toBeNull();
   });
 
-
-})
+});
