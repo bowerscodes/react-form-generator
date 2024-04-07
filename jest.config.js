@@ -13,5 +13,6 @@ module.exports = {
   coveragePathIgnorePatterns: ['/node_modules/'],
   setupFilesAfterEnv: ['./jest.setup.ts'],
   collectCoverage: true,
+  collectCoverageFrom: ['src/**/*.{ts,tsx}'],
   coverageReporters: ['json', 'lcov', 'text', 'clover'],
 };

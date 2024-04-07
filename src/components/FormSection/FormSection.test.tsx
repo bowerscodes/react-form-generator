@@ -1,10 +1,11 @@
 import React from 'react';
 import '@testing-library/jest-dom';
-import { cleanup, fireEvent, render, screen, act } from '@testing-library/react';
+import { cleanup, fireEvent, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import FormSection from './FormSection';
 import { FormSectionProps, FormFieldProps, InputField } from '../../types/FormTypes';
+import { render } from '../../utils/test/testUtils';
 
 afterEach(cleanup);
 

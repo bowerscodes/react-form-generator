@@ -1,9 +1,10 @@
 import React from 'react';
 import '@testing-library/jest-dom';
-import { cleanup, fireEvent, render, screen, act } from '@testing-library/react';
+import { cleanup, fireEvent, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import FormField from './FormField';
+import { render } from '../../utils/test/testUtils';
 
 afterEach(cleanup);
 
