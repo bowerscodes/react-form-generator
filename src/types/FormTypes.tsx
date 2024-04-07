@@ -5,7 +5,7 @@ export type FormData = {
 
 export interface FormProps {
   formId: string;
-  formTitle?: string;
+  formTitle: string;
   pages: FormPageProps[];
   formAction?: (data: FormData) => void;
 };

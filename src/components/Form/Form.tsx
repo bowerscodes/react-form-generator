@@ -47,7 +47,7 @@ const Form = ({
 
   return(
     <div className={DEFAULT_CLASS} id={formId}>
-      <form onSubmit={handleSubmit}>
+      <form aria-label={formTitle} onSubmit={handleSubmit}>
         {formTitle && <Heading hNumber='1'>{formTitle}</Heading>}
         <FormPage key={`formPage--${pages[currentPage]}`} {...pages[currentPage]} />
         {pages.length > 1 && 
