@@ -25,7 +25,7 @@ export interface FormSectionProps {
 
 export interface FormFieldProps {
   fieldId: string;
-  fieldLabel?: string;
+  fieldLabel: string;
   inputField: InputField;
   value?: string | string[];
 };

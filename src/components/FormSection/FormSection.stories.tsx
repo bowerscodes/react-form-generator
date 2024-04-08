@@ -14,7 +14,7 @@ export default {
 
 const section1 = Page.sections[0];
 
-const FieldWithHandlers: React.FC<FormFieldProps> = ({ inputField }) => {
+const FieldWithHandlers: React.FC<FormFieldProps> = ({ fieldLabel, inputField }) => {
   const [ value, setValue ] = useState('');
 
   const handleChange = (event: InputChangeEvent) => {
@@ -26,27 +26,29 @@ const FieldWithHandlers: React.FC<FormFieldProps> = ({ inputField }) => {
   return (
     <FormField 
       {...inputField}
+      fieldLabel={fieldLabel}
       inputField={{...inputField}}
     />
   );
 };
 
-const fieldsWithHandlers: FormFieldProps[] = section1.fields.map((field, index) => {
-  return {
-    ...field,
-    inputField : {
-      ...field.inputField,
-      onChange: (event: InputChangeEvent) => {
-        if (typeof event.target.value === 'string') {
-          if ('value' in field.inputField) {
-            field.inputField.value = event.target.value;
-          }
-        }
-      },
-    },
-    key: index
-  };
-});
+// const fieldsWithHandlers: FormFieldProps[] = section1.fields.map((field, index) => {
+//   return {
+//     ...field,
+//     fieldLabel: field.fieldLabel,
+//     inputField : {
+//       ...field.inputField,
+//       onChange: (event: InputChangeEvent) => {
+//         if (typeof event.target.value === 'string') {
+//           if ('value' in field.inputField) {
+//             field.inputField.value = event.target.value;
+//           }
+//         }
+//       },
+//     },
+//     key: index
+//   };
+// });
 
 const section = { ...section1};
 
