@@ -13,10 +13,11 @@ export default {
 const Wrapper = () => {
   
     const [ formData, setFormData ] = useState({});
+    const formAction = (data: { [key: string]: string | string[]; formId: string }) => {};
   
     return(
       <FormDataContextProvider formSchema={form}>
-        <Form {...form} />
+        <Form {...form} formAction={formAction} />
       </FormDataContextProvider>
     );
   

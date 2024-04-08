@@ -39,9 +39,11 @@ const Form = ({
     }
     if (formAction) {
       formAction(formData);
+      alert('Form submitted: ' + JSON.stringify(formData));
+
     }
     else {
-      alert('Form submitted: ' + JSON.stringify(formData));
+      alert('Form not submitted - no formAction: ' + JSON.stringify(formData));
     }
   };
 
@@ -56,7 +58,7 @@ const Form = ({
             navItems={pages}
             currentIndex={currentPage}
             setCurrent={setCurrentPage}
-            submit
+            submit={formAction ? handleSubmit : undefined}
           />
         }
       </form>

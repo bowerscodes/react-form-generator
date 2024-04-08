@@ -7,7 +7,7 @@ export interface FormProps {
   formId: string;
   formTitle: string;
   pages: FormPageProps[];
-  formAction?: (data: FormData) => void;
+  formAction?: ((date: { [ key: string]: string | string[]; formId: string; }) => void )| undefined;
 };
 
 export interface FormPageProps {
