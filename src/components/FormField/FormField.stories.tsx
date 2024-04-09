@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { StoryFn } from '@storybook/react';
 
+import withFormDataContext from '../../../.storybook/withFormDataContext';
 import Page from '../../data/FormPage.json';
 import FormField from './FormField';
 import { InputChangeEvent } from '../../utils/hooks/useInputField';
@@ -16,6 +18,7 @@ const select = Page.sections[3].fields[0];
 export default {
   title: 'Components/FormField',
   component: FormField,
+  decorators: [withFormDataContext],
 };
 
 
