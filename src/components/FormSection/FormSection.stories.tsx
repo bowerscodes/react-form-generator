@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 
 import withFormDataContext from '../../../.storybook/withFormDataContext';
+import withValidationContext from '../../../.storybook/withValidationContext';
+import Form from '../../data/MultiPageForm.json';
 import Page from '../../data/FormPage.json';
 import FormSection from './FormSection';
 import FormField from '../FormField/FormField';
@@ -11,10 +13,10 @@ import { InputChangeEvent } from '../../utils/hooks/useInputField';
 export default {
   title: 'Components/FormSection',
   component: FormSection,
-  decorators: [withFormDataContext],
+  decorators: [withFormDataContext, withValidationContext],
 };
 
-const section1 = Page.sections[0];
+const section1 = Form.pages[0].sections[0];
 
 const FieldWithHandlers: React.FC<FormFieldProps> = ({ fieldLabel, inputField }) => {
   const [ value, setValue ] = useState('');

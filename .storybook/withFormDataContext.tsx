@@ -6,14 +6,9 @@ import { FormProps } from '../src/types/FormTypes';
 import Page from '../src/data/FormPage.json';
 
 const withFormDataContext = (storyFn: StoryFn<React.ReactNode>, context: any) => {
-  const formSchema: FormProps = {
-    formId: '',
-    formTitle: '',
-    pages: [Page]
-  };
-
+  console.log('context: ', context);
   return (
-    <FormDataContextProvider formSchema={formSchema}>
+    <FormDataContextProvider>
       {storyFn(context.args, context)}
     </FormDataContextProvider>
   );

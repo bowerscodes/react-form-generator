@@ -4,7 +4,7 @@ import { ButtonGroup, Heading, Navigate } from 'react-component-library';
 import FormPage from '../FormPage/FormPage';
 import { FormProps, FormPageProps } from '../../types/FormTypes';
 import { FormDataContext } from '../../context/FormDataContext';
-
+import { ValidationContext } from '../../context/ValidationContext';
 
 export const DEFAULT_CLASS = 'form';
 
@@ -20,6 +20,10 @@ const Form = ({
   if (!context) {
     throw new Error('Form must be used within a FormDataContextProvider')
   };
+  const validationContext = useContext(ValidationContext);
+  if (!validationContext) {
+    throw new Error('Form must be used within a ValidationProvider');
+  }
   
   const { formData, setFormData } = context;
   const [ currentPage, setCurrentPage ] = useState(0);

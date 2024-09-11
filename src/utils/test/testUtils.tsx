@@ -2,6 +2,7 @@ import { render, RenderOptions, RenderResult } from '@testing-library/react';
 import React, { ReactElement } from 'react';
 
 import { FormDataContextProvider } from '../../context/FormDataContext';
+import { ValidationContextProvider } from '../../context/ValidationContext';
 import { FormFieldProps } from '../../types/FormTypes';
 
 
@@ -35,8 +36,10 @@ const customRender = (ui: ReactElement, options?: RenderOptions): RenderResult =
   };
 
   return render(
-    <FormDataContextProvider formSchema={formSchema}>
-      {ui}
+    <FormDataContextProvider>
+      <ValidationContextProvider>
+        {ui}
+      </ValidationContextProvider>
     </FormDataContextProvider>,
     options
   );

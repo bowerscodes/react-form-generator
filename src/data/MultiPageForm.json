@@ -16,9 +16,17 @@
               "inputField": {
                 "fieldId": "firstName",
                 "type": "text",
-                "props": {
-                  "required": true
-                }
+                "validation": [
+                  {
+                    "type": "maxLength",
+                    "max": 50,
+                    "errorMessage": "First name must be no more than 50 characters long"
+                  },
+                  {
+                    "type": "required",
+                    "errorMessage": "First name is required"
+                  }
+                ]
               }
             },
             {
@@ -27,9 +35,17 @@
               "inputField": {
                 "fieldId": "lastName",
                 "type": "text",
-                "props": {
-                  "required": true
-                }
+                "validation": [
+                  {
+                    "type": "maxLength",
+                    "max": 50,
+                    "errorMessage": "Last name must be no more than 50 characters long"
+                  },
+                  {
+                    "type": "required",
+                    "errorMessage": "Last name is required"
+                  }
+                ]
               }
             },
             {
@@ -38,9 +54,34 @@
               "inputField": {
                 "fieldId": "dob",
                 "type": "date",
-                "props": {
-                  "required": true
-                }
+                "validation": [
+                  {
+                    "type": "mustBeInThePast",
+                    "errorMessage": "Date of birth must be in the past"
+                  },
+                  {
+                    "type": "required",
+                    "errorMessage": "Please enter a valid date of birth"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldId" : "email",
+              "fieldLabel": "Email Address",
+              "inputField": {
+                "fieldId": "email",
+                "type": "text",
+                "validation": [
+                  {
+                    "type": "email",
+                    "errorMessage": "Please enter a valid email address"
+                  },
+                  {
+                    "type": "required",
+                    "errorMessage": "Email address is required"
+                  }
+                ]
               }
             }
           ]
@@ -60,6 +101,12 @@
               "inputField": {
                 "fieldId": "serviceType",
                 "type": "checkboxes",
+                "validation": [
+                  {
+                    "type": "required",
+                    "errorMessage": "Please select at least one service"
+                  }
+                ],
                 "props": {
                   "options": [
                     {
@@ -82,8 +129,7 @@
                       "value": "brandManagement",
                       "label": "Brand Management"
                     }
-                  ],
-                  "required": true
+                  ]
                 }
               }
             }
@@ -104,9 +150,13 @@
               "inputField": {
                 "fieldId": "otherInfo",
                 "type": "textArea",
-                "props": {
-                  "required": false
-                }
+                "validation": [
+                  {
+                    "type": "maxLength",
+                    "max": 500,
+                    "errorMessage": "Please share your coments in under 500 characters" 
+                  }
+                ]
               }
             }
           ]
@@ -127,6 +177,12 @@
               "inputField": {
                 "fieldId": "howDidYouHear",
                 "type": "select",
+                "validation": [
+                  {
+                    "type": "required",
+                    "errorMessage": "Please select an option"
+                  }
+                ],
                 "props": {
                   "options": [
                     {
@@ -154,8 +210,7 @@
                       "value": "other",
                       "label": "Other"
                     }
-                  ],
-                  "required": true
+                  ]
                 }
               }
             }
@@ -171,6 +226,12 @@
               "inputField": {
                 "fieldId": "commsConsent",
                 "type": "radios",
+                "validation": [
+                  {
+                    "type": "required",
+                    "errorMessage": "Please select an option"
+                  }
+                ],
                 "props": {
                   "options": [
                     {
@@ -183,8 +244,7 @@
                       "value": "no",
                       "label": "No"
                     }
-                  ],
-                  "required": true
+                  ]
                 }
               }
             }

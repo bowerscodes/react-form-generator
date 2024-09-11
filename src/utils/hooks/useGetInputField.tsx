@@ -36,7 +36,7 @@ const useGetInputField = (input: InputField, formDataValue: string | string[] | 
 
   switch (type) {
     case 'checkboxes': {
-      const checkboxOptions = props.options as CheckboxOption[];
+      const checkboxOptions = props?.options as CheckboxOption[];
       return (
         <Checkboxes 
           fieldId={fieldId} 
@@ -50,11 +50,11 @@ const useGetInputField = (input: InputField, formDataValue: string | string[] | 
     case 'date':
       return <DateInput fieldId={fieldId} value={inputValue as string} onChange={handleChange} {...props} />;
     case 'radios': {
-      const radioOptions = props.options as RadioOption[];
+      const radioOptions = props?.options as RadioOption[];
       return <Radios fieldId={fieldId} options={radioOptions} value={inputValue as string} onChange={handleChange} {...props} />;
     }
     case 'select': {
-      const selectOptions = props.options as SelectOption[];
+      const selectOptions = props?.options as SelectOption[];
       return <Select fieldId={fieldId} options={selectOptions} value={inputValue} onChange={handleChange} {...props} />;
     }
     case 'textArea':

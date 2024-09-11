@@ -1,4 +1,3 @@
-// useInputField.ts
 import React, { useEffect, useState } from 'react';
 import { CheckboxesEventTarget } from 'react-component-library';
 

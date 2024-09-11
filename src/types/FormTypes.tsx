@@ -1,5 +1,5 @@
+
 export type FormData = {
-  formId: string;
   [key: string]: string | string[];
 };
 
@@ -7,7 +7,7 @@ export interface FormProps {
   formId: string;
   formTitle: string;
   pages: FormPageProps[];
-  formAction?: ((date: { [ key: string]: string | string[]; formId: string; }) => void )| undefined;
+  formAction?: ((date: { [ key: string]: string | string[]; }) => void )| undefined;
 };
 
 export interface FormPageProps {
@@ -30,10 +30,17 @@ export interface FormFieldProps {
   value?: string | string[];
 };
 
+export interface ValidationRule {
+  type: string;
+  errorMessage: string;
+  args?: any
+};
 
 export interface InputField {
   fieldId: string;
   type: string;
-  props: Record<string, unknown>;
+  props?: Record<string, unknown>;
   value?: string | string[] | undefined;
+  validation?: Array<Object>;
+  errors?: string[];
 };
