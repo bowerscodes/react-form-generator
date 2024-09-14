@@ -33,7 +33,6 @@ export const validateDate = (
   }
 
   
-  
   if (comparisonDate && comparisonType) {
     if (comparisonType === 'past' && date >= comparisonDate) {
       propsInError.year = year > comparisonDate.getFullYear();
@@ -50,7 +49,7 @@ export const validateDate = (
   
   const hasErrors = Object.values(propsInError).some(Boolean);
   const error = hasErrors ? errorMessage || errorMessages : null;
-  
+
   return { error, propsInError };
 
 };
