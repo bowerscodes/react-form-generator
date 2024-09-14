@@ -23,7 +23,7 @@ export interface InputFieldWithOnChange extends InputField {
   onChange: OnChange;
 }
 
-const useGetInputField = (input: InputField, formDataValue: string | string[] | undefined, onChange: (event: InputChangeEvent) => void = () => {}) => {
+const useGetInputField = (input: InputField, formDataValue: string | string[] | undefined, onChange: (event: InputChangeEvent) => void = () => {}, fieldErrors: string[] | undefined, fieldPropsInError: { [subKey: string]: boolean; }) => {
   
   const { fieldId, type, props } = input;
   const { getValue, handleChange } = useInputField(formDataValue, onChange);
@@ -33,6 +33,7 @@ const useGetInputField = (input: InputField, formDataValue: string | string[] | 
     inputValue = getValue();
   }
 
+  // console.log('useGetInputFieldErrors: ', fieldErrors);
 
   switch (type) {
     case 'checkboxes': {
@@ -48,7 +49,15 @@ const useGetInputField = (input: InputField, formDataValue: string | string[] | 
       );
     }
     case 'date':
-      return <DateInput fieldId={fieldId} value={inputValue as string} onChange={handleChange} {...props} />;
+      return (
+        <DateInput 
+          fieldId={fieldId} 
+          value={inputValue as string} 
+          onChange={handleChange} 
+          errors={fieldErrors}
+          propsInError={fieldPropsInError}
+          {...props} />
+      );
     case 'radios': {
       const radioOptions = props?.options as RadioOption[];
       return <Radios fieldId={fieldId} options={radioOptions} value={inputValue as string} onChange={handleChange} {...props} />;
@@ -73,6 +82,7 @@ const useGetInputField = (input: InputField, formDataValue: string | string[] | 
           fieldId={fieldId} 
           value={inputValue as string} 
           onChange={handleChange} 
+          errors={fieldErrors}
           {...props} 
         />
       );

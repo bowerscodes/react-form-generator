@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { Label } from 'react-component-library';
+import { Label, ErrorMessage } from 'react-component-library';
 
 import { FormData, FormFieldProps, InputField } from '../../types/FormTypes';
 import { handleInputChange } from './handlers';
@@ -8,7 +8,6 @@ import { InputChangeEvent } from '../../utils/hooks/useInputField';
 import { FormDataContext } from '../../context/FormDataContext';
 import { ValidationContext } from '../../context/ValidationContext';
 import './FormField.scss';
-
 
 
 export const DEFAULT_CLASS = 'form-field';
@@ -30,7 +29,7 @@ const FormField = ({
   }
   
   const { formData, setFormData } = formDataContext
-  const { errors, validate } = validationContext;
+  const { errors, propsInError, validate } = validationContext;
 
   const getFieldValue = (formData: FormData, fieldId: string): string | undefined => {
     const value = formData[fieldId];
@@ -40,6 +39,17 @@ const FormField = ({
   const [ value, setValue ] = useState(getFieldValue(formData, fieldId) || inputField.value || '');
   const prevValueRef = useRef(value);
 
+  const inputFieldWithOnChange: InputFieldWithOnChange = {
+    ...inputField,
+    onChange: (event: InputChangeEvent) => {
+      setValue(event.target.value);
+      setFormData({
+        ...formData, 
+        [fieldId]: event.target.value 
+      });
+    }
+  };
+  
   useEffect(() => {
     if(formData[fieldId]) {
       setValue(formData[fieldId])
@@ -53,29 +63,25 @@ const FormField = ({
     }
   }, [value, fieldId, inputField.validation, validate]);
 
-  const inputFieldWithOnChange: InputFieldWithOnChange = {
-    ...inputField,
-    onChange: (event: InputChangeEvent) => {
-      setValue(event.target.value);
-      setFormData({
-        ...formData, 
-        [fieldId]: event.target.value 
-      });
-    }
-  };
   
   const handleChange = handleInputChange(fieldId, setValue, inputFieldWithOnChange, setFormData, formData);
   
   if (process.env.NODE_ENV === 'development') {
-    console.log(fieldId,': ',value);
+    console.log('fieldId, value: ', fieldId, value);
     console.log('formData: ', formData);
   }
 
-  const input = useGetInputField({ ...inputFieldWithOnChange, value }, value, handleChange);
+  const fieldErrors = errors[fieldId];
+  const fieldPropsInError = propsInError[fieldId];
+  console.log('propsInError: ', propsInError);
+  console.log('fieldId, errors, fieldErrors, fieldPropsInError: ', fieldId, errors, fieldErrors, fieldPropsInError);
+
+  const input = useGetInputField({ ...inputFieldWithOnChange, value }, value, handleChange, fieldErrors, fieldPropsInError);
 
   return(
     <div className={DEFAULT_CLASS}>
       {fieldLabel && <Label fieldId={fieldId}>{fieldLabel}</Label>}
+      {fieldErrors && fieldErrors.map((error, index) => <ErrorMessage key={index}>{error}</ErrorMessage>)}
       {input}
     </div>
   )

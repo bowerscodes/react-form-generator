@@ -7,7 +7,8 @@ import { FormProps } from '../src/types/FormTypes';
 
 
 
-const withValidationContext = (StoryFn: StoryFn<React.ReactNode>, context: any) => {  
+const withValidationContext = (StoryFn: StoryFn<React.ReactNode>, context: any) => { 
+
   return (
     <ValidationContextProvider>
       {StoryFn(context.args, context)}

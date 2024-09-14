@@ -23,6 +23,11 @@
                     "errorMessage": "First name must be no more than 50 characters long"
                   },
                   {
+                    "type": "minLength",
+                    "min": 2,
+                    "errorMessage": "First name must be at least 2 characters long"
+                  },
+                  {
                     "type": "required",
                     "errorMessage": "First name is required"
                   }
