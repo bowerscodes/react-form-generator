@@ -10,13 +10,6 @@ export const validateDate = (
   const propsInError: { day?: boolean; month?: boolean; year?: boolean } = { day: false, month: false, year: false };
   const errorMessages: { day?: string; month?: string; year?: string } = {};
   const [day, month, year] = formattedDate.split('-').map(Number);
-  
-  if (day === undefined || isNaN(day) || month === undefined || isNaN(month) || year === undefined || isNaN(year)) {
-    propsInError.day = day === undefined || isNaN(day);
-    propsInError.month = month === undefined || isNaN(month);
-    propsInError.year = year === undefined || isNaN(year);
-    return { error: errorMessage || 'Invalid date format', propsInError };
-  }
 
   const date = new Date(year, month - 1, day);
 
@@ -34,29 +27,30 @@ export const validateDate = (
   }
   if (day && month && year) {
     if (day > daysInMonth(month, year)) {
-      propsInError.day = true;
-      errorMessages.day = 'invalid day';
+        propsInError.day = true;
+        errorMessages.day = 'invalid day';
     };
   }
 
-  const hasErrors = Object.values(propsInError).some(Boolean);
-  const error = hasErrors ? errorMessage || errorMessages : null;
-
-
+  
+  
   if (comparisonDate && comparisonType) {
     if (comparisonType === 'past' && date >= comparisonDate) {
-      propsInError.day = day > comparisonDate.getDate();
-      propsInError.month = month > comparisonDate.getMonth() + 1;
       propsInError.year = year > comparisonDate.getFullYear();
-    };
-  
+      propsInError.month = year === comparisonDate.getFullYear() && month > comparisonDate.getMonth() + 1;
+      propsInError.day = year === comparisonDate.getFullYear() && month === comparisonDate.getMonth() + 1 && day > comparisonDate.getDate();
+    }
+    
     if (comparisonType === 'future' && date <= comparisonDate) {
-      propsInError.day = day < comparisonDate.getDate();
-      propsInError.month = month < comparisonDate.getMonth() + 1;
       propsInError.year = year < comparisonDate.getFullYear();
-    };
+      propsInError.month = year === comparisonDate.getFullYear() && month < comparisonDate.getMonth() + 1;
+      propsInError.day = year === comparisonDate.getFullYear() && month === comparisonDate.getMonth() + 1 && day < comparisonDate.getDate();
+    }
   }
-
+  
+  const hasErrors = Object.values(propsInError).some(Boolean);
+  const error = hasErrors ? errorMessage || errorMessages : null;
+  
   return { error, propsInError };
 
 };
