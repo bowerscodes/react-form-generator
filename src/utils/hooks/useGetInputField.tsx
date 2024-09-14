@@ -44,6 +44,7 @@ const useGetInputField = (input: InputField, formDataValue: string | string[] | 
           options={checkboxOptions} 
           value={inputValue as string[]} 
           onChange={handleChange} 
+          errors={fieldErrors}
           {...props}
         />
       );

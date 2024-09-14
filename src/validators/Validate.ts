@@ -4,8 +4,8 @@ import { validateDate } from './validateDate';
 type ValidateProps = {
   required: (value: string | string[] | number, errorMessage?: string) => string | Object | null;
   email: (value: string, errorMessage?: string) => string | null;
-  maxLength: (value: string | number, max: string | number, errorMessage?: string) => string | null;
-  minLength: (value: string | number, min: string | number, errorMessage?: string) => string | null;
+  maxLength: (value: string | number, max: string | number, errorMessage?: string) => string | null | undefined;
+  minLength: (value: string | string[] | number, min: string | number, errorMessage?: string) => string | null | undefined;
   mustBeInThePast: (formattedDate: string, errorMessage?: string) => string | Object | null;
   mustBeInTheFuture: (formattedDate: string, errorMessage?: string) => string | Object | null;
   pattern: (value: string | number | string[], regex: RegExp, errorMessage: string) => string | null;
@@ -33,7 +33,6 @@ export const Validate: ValidateProps = {
     else {
       return value !== '' || null ? null : errorMessage || 'This field is required';
     }
-
   }),
   
   email: ((value: string, errorMessage?: string) => {
@@ -41,22 +40,28 @@ export const Validate: ValidateProps = {
     return emailRegex.test(value as string) ? null : errorMessage || 'Please enter a valid email address';
   }),
   
-  maxLength: ((value: string | number, max: string | number, errorMessage?: string) => {
+  maxLength: ((value: number | string | string[], max: string | number, errorMessage?: string) => {
     if (typeof value === 'number') {
       value = value.toString();
     }
     if (typeof max === 'string') {
       max = parseInt(max);
     }
+    if (Array.isArray(value)) {
+      return value.length <= max ? null : errorMessage || `Please select no more than ${max} options`;
+    }
     return value.length <= max ? null : errorMessage || `This field must be less than ${max} characters`;
   }),
   
-  minLength: ((value: number | string, min: number | string, errorMessage?: string) => {
+  minLength: ((value: number | string | string[], min: number | string, errorMessage?: string) => {
     if (typeof min === 'string') {
       min = parseInt(min);
     }
     if (typeof value === 'number') {
       value = value.toString();
+    }
+    if (Array.isArray(value)) {
+      return value.length >= min ? null : errorMessage || `Please select at least ${min} options`;
     }
     return value.length >= min ? null : errorMessage || `This field must be at least ${min} characters`;
   }),
